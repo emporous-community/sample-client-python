@@ -52,7 +52,7 @@ def create_auth_config(reference: str) -> pb2.AuthConfig:
     creds = auth.resolve_authconfig(auth_configs, registry)
     if creds is not None:
         auth_config = pb2.AuthConfig(
-            server_address=f"https://{registry}",
+            registry_host=registry,
             username=creds["username"],
             password=creds["password"],
         )
@@ -62,7 +62,7 @@ def create_auth_config(reference: str) -> pb2.AuthConfig:
 class SampleClient:
     """
     SampleClient is a cli that acts as a gRPC client
-    with the UOR gRPC server to retrieve and publish collection content.
+    with the Emporous gRPC server to retrieve and publish collection content.
     """
 
     def __init__(self, socket: str):
@@ -76,7 +76,7 @@ class SampleClient:
 
     def pull(self, reference: str, workspace: str, attributes: dict = None) -> str:
         """
-        Pull content from UOR collection to specified workspace.
+        Pull content from Emporous collection to specified workspace.
 
         Parameters
         ----------
@@ -125,7 +125,7 @@ class SampleClient:
 
     def push(self, workspace: str, reference: str) -> str:
         """
-        Push content to UOR collection from specified workspace.
+        Push content to Emporous collection from specified workspace.
 
         Parameters
         ----------
@@ -163,12 +163,12 @@ class SampleClient:
 
 
 if __name__ == "__main__":
-    if os.getenv("UOR_SOCKET_ADDRESS", None):
-        socket_address = os.getenv("UOR_SOCKET_ADDRESS")
+    if os.getenv("Emporous_SOCKET_ADDRESS", None):
+        socket_address = os.getenv("EMPOROUS_SOCKET_ADDRESS")
     else:
-        socket_address = "/var/run/uor.sock"
+        socket_address = "/var/run/emporous.sock"
         logging.info(
-            "Using socket location %s. To customize, use the UOR_SOCKET_ADDRESS environment variable.",
+            "Using socket location %s. To customize, use the EMPOROUS_SOCKET_ADDRESS environment variable.",
             socket_address,
         )
 
