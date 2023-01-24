@@ -55,7 +55,7 @@ def create_auth_config(reference: str) -> pb2.AuthConfig:
     creds = auth.resolve_authconfig(auth_configs, registry)
     if creds is not None:
         auth_config = pb2.AuthConfig(
-            server_address=registry,
+            registry_host=registry,
             username=creds["username"],
             password=creds["password"],
         )
