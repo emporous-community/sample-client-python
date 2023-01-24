@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# sample_client.py
+
 import logging
 import grpc
 import os
@@ -163,7 +166,7 @@ class SampleClient:
 
 
 if __name__ == "__main__":
-    if os.getenv("Emporous_SOCKET_ADDRESS", None):
+    if os.getenv("EMPOROUS_SOCKET_ADDRESS", None):
         socket_address = os.getenv("EMPOROUS_SOCKET_ADDRESS")
     else:
         socket_address = "/var/run/emporous.sock"
